@@ -1,5 +1,6 @@
 import EventEmitter from 'events';
 import { fromJS, Map, List } from 'immutable';
+import { Vector3 } from 'immutable';
 
 let state = fromJS({
   manifestUrl: 'http://192.168.1.67:3002/cache/cavecams.json',
@@ -13,6 +14,9 @@ let state = fromJS({
     sceneMode: 'SphereMenu',
     splitMode: 'Horizontal',
     controlMode: 'Touch'
+  },
+  cupcake: {
+    y: 0
   }
 });
 
@@ -64,6 +68,11 @@ function reducer(oldState, action) {
     newState = oldState
       .setIn(['viewer', 'width'], action.width)
       .setIn(['viewer', 'height'], action.height);
+    break;
+
+  case 'UpdateCupcakeY':
+    newState = oldState
+      .setIn(['cupcake', 'y'], action.y);
     break;
 
   default: break;
